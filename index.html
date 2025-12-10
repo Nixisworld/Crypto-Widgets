@@ -1,48 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crypto Prices Widget</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Prices Widget - Transparent</title>
   <style>
+    /* Make the hosting page transparent (so Notion shows through) */
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* REMOVE SCROLLING */
-      background: #fafafa;
-      font-family: Arial, sans-serif;
+      background: transparent;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
+    /* Full-page wrapper so embed fills the iframe */
     .page-wrapper {
-      height: 100vh; /* Full page */
-      width: 100vw;  /* Full width */
+      height: 100vh;
+      width: 100vw;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
       box-sizing: border-box;
+      padding: 12px; /* optional breathing room */
+      background: transparent;
     }
 
+    /* Remove any background or border from the widget container */
     .widget-container {
       width: 100%;
-      max-width: 700px;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      max-width: 900px;
       box-sizing: border-box;
+      background: transparent !important;
+      border-radius: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Try to force transparency on the widget iframe (if the widget injects one) */
+    #coinmarketcap-widget-coin-price-block,
+    #coinmarketcap-widget-coin-price-block * {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* If the widget creates an iframe, target it */
+    #coinmarketcap-widget-coin-price-block iframe {
+      background: transparent !important;
     }
   </style>
 </head>
 <body>
   <div class="page-wrapper">
     <div class="widget-container">
-      
-  <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script><div id="coinmarketcap-widget-coin-price-block" coins="1,1027,5426,11841,52" currency="USD" theme="light" transparent="false" show-symbol-logo="true"></div>
-
+      <!-- widget: note I changed transparent="true" -->
+      <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script>
+      <div id="coinmarketcap-widget-coin-price-block"
+           coins="1,1027,5426,11841,52"
+           currency="USD"
+           theme="light"
+           transparent="true"
+           show-symbol-logo="true">
+      </div>
     </div>
   </div>
 </body>
 </html>
-
